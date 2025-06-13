@@ -5,11 +5,12 @@
 @section('content')
 
 <div>
+
 <article>
     <header>
        {{$product->name}}
     </header>
-    <img src="{{$product->img_url}}" alt="{{$product->name}}">
+    <img src="{{asset($product->img_url)}}" alt="{{$product->name}}">
     <p>{{$product->description}}</p>
     <p>precio: {{$product->price}}</p>
 <footer>

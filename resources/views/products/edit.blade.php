@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form action="{{route('product.update',$product->id)}}" class="form" method="POST">
+<form action="{{route('product.update',$product->id)}}" class="form" method="POST" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <label>Nombre
@@ -15,7 +15,7 @@
     <img src="{{ asset($product->img_url) }}" alt="{{$product->name}}">
     <label>Imagen
     <br><br>
-    <input type='file' name="img_url" id="img_url" value="{{asset($product->img_url)}}">
+    <input type='file' name="img_url" id="img_url" accept=".webp">
     </label>
     <label>Descripción
     <textarea name="description" id="description" cols="30" rows="10">{{$product->description}}</textarea>   

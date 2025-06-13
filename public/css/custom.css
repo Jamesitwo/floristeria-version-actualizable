@@ -1,0 +1,31 @@
+[data-theme="light"] {
+  --pico-background-color: #fffaf0!important;  
+  --pico-color:  #333333 !important; /* Gris oscuro */
+  --pico-card-background-color: #fffaf0 !important; /* Azul claro */
+  --pico-primary-background: #7eceb1 !important; /* Verde menta */
+   --pico-primary: #333333 !important; /* Azul oscuro */
+   --pico-card-sectioning-background-color: #fffaf0 !important; /* Rojo */
+}
+
+nav {
+  background-color:#ffb6b9  !important;
+}
+
+.grid  {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+:root {
+  --primary: #ffb6b9;
+  --secondary: #b5ead7;
+  --accent: #ff6f61;
+  --background-color: #fffaf0;
+  --text-color: #333333;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}

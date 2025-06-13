@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest as RequestsProductRequest;
+
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
-use Illuminate\Support\Facades\Storage;
+
 
 use function Ramsey\Uuid\v1;
 
@@ -21,6 +21,14 @@ class ProductController extends Controller
         // Fetch the first 5 products ordered by name in ascending order
        $products= Product::orderBy('name','asc')->limit(5)->get();
         return view('index',compact('products'));
+    }
+
+
+    public function products(){
+        $products=Product::all();
+        // Show the products page with all products
+        return view('products.products',compact('products'));
+
     }
 
     public function productShow($id, $name)
@@ -67,14 +75,24 @@ class ProductController extends Controller
     }
 
     public function update(ProductRequest $request, Product $product){
-        Storage::disk('public')->delete($product->img_url);
+        //Storage::disk('public')->delete($product->img_url);
 
-        $data=$request->validated();
-        // Validate the request data
+       $data = $request->validated();
+
+    // Si se sube una nueva imagen
         if ($request->hasFile('img_url')) {
-        $imageName = time() . '_' . uniqid() . '.' . $request->file('img_url')->extension();
-        $request->file('img_url')->move(public_path('images'), $imageName);
-        $data['img_url']= 'images/'. $imageName; // o 'storage/images/...'
+            // Eliminar la imagen anterior si existe
+            if ($product->img_url && file_exists(public_path($product->img_url))) {
+                unlink(public_path($product->img_url));
+            }
+
+            // Subir nueva imagen
+            $imageName = time() . '_' . uniqid() . '.' . $request->file('img_url')->extension();
+            $request->file('img_url')->move(public_path('images'), $imageName);
+            $data['img_url'] = 'images/' . $imageName;
+        } else {
+            // Mantener la imagen anterior
+            $data['img_url'] = $product->img_url;
         }
         // Validate the request data
         $product->update($data);

@@ -20,7 +20,7 @@ route::put('arreflo/update/{product}',[ProductController::class,'update'])->name
 route::delete('arreglo/delete/{product}',[ProductController::class,'destroy'])->name('product.delete');
 
 Route::get('/',[ProductController::class, 'index'])->name('index');
-route::get('/arreglos',[ProductController::class,'arreglos'])->name('products');
+route::get('/arreglos',[ProductController::class,'products'])->name('products');
 route::get('/arreglo/{id}/{name}',[ProductController::class,'productShow'])->name('product.show');
 
 route::get('/arreglo/create',[ProductController::class,'create'])->name('product.create');
